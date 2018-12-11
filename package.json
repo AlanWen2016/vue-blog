@@ -41,7 +41,9 @@
   "dependencies": {
     "autoprefixer": "^9.1.5",
     "axios": "^0.18.0",
+    "element-ui": "^2.4.11",
     "postcss-loader": "^3.0.0",
+    "url-loader": "^1.1.2",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

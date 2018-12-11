@@ -3,10 +3,12 @@ import App from './app.vue'
 import VueRouter from 'vue-router'
 import routerConfig from './router/router.js'
 import Vuex from 'vuex'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
-
+Vue.use(ElementUI);
 const store = new Vuex.Store({
   state: {
     count: 0,
