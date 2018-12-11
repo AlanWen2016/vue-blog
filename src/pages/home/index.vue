@@ -2,6 +2,7 @@
        <div>
     <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="活动名称">
+                <img class="loading-img" src="~Assets/img/content.png">
             <el-input v-model="form.name"></el-input>
         </el-form-item>
         <el-form-item label="活动区域">
