@@ -4,7 +4,7 @@ export default {
         {
             path: '/user',
             name : 'user',
-            component : () => import(/* webpackChunkName: "pages/layout" */'../pages/layout.vue'),
+            component : () => import(/* webpackChunkName: "pages/layout" */'../pages/layout/layout.vue'),
             meta : { keepAlive: false, title:'首页',noTpl:true},
             redirect: '/user',
             children: [
@@ -25,7 +25,7 @@ export default {
         {
             path: '/',
             name : 'home-index',
-            component : () => import(/* webpackChunkName: "pages/layout" */'../pages/layout.vue'),
+            component : () => import(/* webpackChunkName: "pages/layout" */'../pages/layout/layout.vue'),
             meta : { keepAlive: false, title:'首页',noTpl:true},
             children: [
                 {
