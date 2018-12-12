@@ -1,6 +1,6 @@
 <template>
     <el-row :gutter="20">
-        <el-col :span="2" :offset="6" style="height: 60px;">
+        <el-col :span="2" :offset="6" style="height: 60px;margin-top: 20px;font-size:24px;font-weight: bold; color: #e6a23c">
             焦糖大瓜子
         </el-col>
         <el-col :span="12" :offset="0">
@@ -19,7 +19,7 @@
                     <el-menu-item index="2-2">选项2</el-menu-item>
                     <el-menu-item index="2-3">选项3</el-menu-item>
                 </el-submenu>
-                <div style="display: inline-block;">
+                <div style="display: inline-block;line-height: 60px;float: right">
                     <el-input placeholder="请输入内容" v-model="input5" class="input-with-select">
                         <el-button slot="append" icon="el-icon-search"></el-button>
                     </el-input>
@@ -32,7 +32,7 @@
 
 <script>
     export default {
-        name: "header.vue",
+        name: "header-bar",
         data() {
             return {
                 activeIndex: '1',

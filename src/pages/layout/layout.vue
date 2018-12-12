@@ -1,76 +1,49 @@
 <template>
-    <div id="my-pages">
-        <el-container>
-            <el-header>
-                <header-bar></header-bar>
-            </el-header>
+    <el-container>
+        <el-header>
+            <header-bar></header-bar>
+        </el-header>
 
-            <el-row>
-                <div>
-                    <table>
-                        <tr v-for="i in 4">
-                            <td>1234
-                                {{ i }}
-                            </td>
+        <el-row>
+            <el-col :span="16" :offset="4" class="el-main">
+                <el-container>
+                    <el-aside width="300px">
+                        <el-card class="box-card box-card-user-info" shadow="never">
+                            <div slot="header" class="clearfix">
+                                <span>用户信息</span>
+                            </div>
+                        </el-card>
+                        <el-card class="box-card" shadow="never">
+                            <div slot="header" class="clearfix">
+                                <span>博客标签</span>
+                            </div>
+                            <el-tag>标签一</el-tag>
+                            <el-tag type="success">标签二</el-tag>
+                            <el-tag type="info">标签三</el-tag>
+                            <el-tag type="warning">标签四</el-tag>
+                            <el-tag type="warning">标签四</el-tag>
+                            <el-tag type="warning">标签四</el-tag>   <el-tag>标签一</el-tag>
+                            <el-tag type="success">标签二</el-tag>
+                            <el-tag type="info">标签三</el-tag>
+                            <el-tag type="warning">标签四</el-tag>
+                            <el-tag type="warning">标签四</el-tag>
+                            <el-tag type="warning">标签四</el-tag>
+                        </el-card>
+                    </el-aside>
 
-                        </tr>
-                    </table>
-
-                </div>
-                <el-col :span="16" :offset="4" class="el-main">
-                    <el-container>
-                        <el-aside width="300px">
-                            <el-col :span="24">
-                                <el-menu
-                                        default-active="2"
-                                        class="el-menu-vertical-demo"
-                                        @open="handleOpen"
-                                        @close="handleClose">
-                                    <el-submenu index="1">
-                                        <template slot="title">
-                                            <i class="el-icon-location"></i>
-                                            <span>导航一</span>
-                                        </template>
-                                        <el-menu-item-group>
-                                            <template slot="title">分组一</template>
-                                            <el-menu-item index="1-1">选项1</el-menu-item>
-                                            <el-menu-item index="1-2">选项2</el-menu-item>
-                                        </el-menu-item-group>
-                                        <el-menu-item-group title="分组2">
-                                            <el-menu-item index="1-3">选项3</el-menu-item>
-                                        </el-menu-item-group>
-                                        <el-submenu index="1-4">
-                                            <template slot="title">选项4</template>
-                                            <el-menu-item index="1-4-1">选项1</el-menu-item>
-                                        </el-submenu>
-                                    </el-submenu>
-                                    <el-menu-item index="2">
-                                        <i class="el-icon-menu"></i>
-                                        <span slot="title">导航二</span>
-                                    </el-menu-item>
-                                    <el-menu-item index="3" disabled>
-                                        <i class="el-icon-document"></i>
-                                        <span slot="title">导航三</span>
-                                    </el-menu-item>
-                                    <el-menu-item index="4">
-                                        <i class="el-icon-setting"></i>
-                                        <span slot="title">导航四</span>
-                                    </el-menu-item>
-                                </el-menu>
-                            </el-col>
-                        </el-aside>
-                        <el-container class="el-main-right">
-                            <!-- 右边主体[[ -->
-                            <router-view></router-view>
-                            <!-- 右边主体]] -->
-                        </el-container>
+                    <el-container class="el-main-right">
+                        <!-- 右边主体[[ -->
+                        <router-view></router-view>
+                        <!-- 右边主体]] -->
                     </el-container>
+                </el-container>
+                <el-footer>
+                    Footer
+                </el-footer>
+            </el-col>
+        </el-row>
+    </el-container>
 
-                    <el-footer>Footer</el-footer>
-                </el-col>
-            </el-row>
-        </el-container>
-    </div>
 </template>
 <style lang="scss">
     body {
@@ -92,25 +65,32 @@
         background-color: white;
     }
     .el-aside {
-        background-color: white;
+        background-color: #eee;
         color: #333;
         text-align: center;
-        line-height: 200px;
         margin-right: 1em;
     }
-
     body > .el-container {
         margin-bottom: 40px;
     }
 
-    .el-container:nth-child(5) .el-aside,
-    .el-container:nth-child(6) .el-aside {
-        line-height: 260px;
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: "";
     }
-  .el-container:nth-child(7) .el-aside {
-    line-height: 320px;
-  }
+    .clearfix:after {
+        clear: both
+    }
 
+    .box-card {
+        width: 298px;
+    }
+    .box-card-user-info{
+        width: 298px;
+        height: 400px;
+        margin-bottom: 1em;
+    }
 </style>
 
 

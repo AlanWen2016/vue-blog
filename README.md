@@ -28,3 +28,19 @@ Simple blog base on Vue.js and Element UI
 ├── favicon.ico                                   // 图标
 ├── index.html                                    // 入口html文件
 .
+```
+### 项目安装
+
+```
+git clone https://github.com/AlanWen2016/vue-blog.git
+cd vue-blog
+```
+### 本地开发
+```
+npm install && npm run dev
+```
+
+### 项目构建
+```
+npm run build
+```
