@@ -2,6 +2,7 @@
 Simple blog base on Vue.js and Element UI
 ## 项目目录说明
 
+### 参考网站样式： https://www.lishuaishuai.com/
 ```
 .
 │── build/                                       // 基本配置
