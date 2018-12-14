@@ -30,9 +30,15 @@ export default {
             children: [
                 {
                     path: '/',
-                    name : 'user-user',
+                    name : 'home-index',
                     component : () => import(/* webpackChunkName: "pages/home/" */'../pages/home/index.vue'),
-                    meta : { keepAlive: false, title:'用户管理',noTpl:true},
+                    meta : { keepAlive: false, title:'首页列表',noTpl:true},
+                },
+                {
+                    path: '/blog/detail',
+                    name : 'blog-detail',
+                    component : () => import(/* webpackChunkName: "pages/blog/" */'../pages/blog/detail.vue'),
+                    meta : { keepAlive: false, title:'内容详情',noTpl:true},
                 },
 
             ]
