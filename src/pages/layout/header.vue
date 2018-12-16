@@ -1,7 +1,9 @@
 <template>
     <el-row :gutter="20">
-        <el-col :span="2" :offset="6" style="height: 60px;margin-top: 20px;font-size:24px;font-weight: bold; color: #e6a23c">
-            焦糖大瓜子
+        <el-col :span="4" :offset="4" style="height: 60px;font-size:24px;font-weight: bold; color: #e6a23c">
+            <div style="width:250px;height:60px">
+                <img class="img-logo" src="~Assets/img/logof.png">
+            </div>
         </el-col>
         <el-col :span="12" :offset="0">
             <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
@@ -55,5 +57,5 @@
 </script>
 
 <style scoped>
-
+   
 </style>

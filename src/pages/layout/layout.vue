@@ -12,7 +12,7 @@
                             <div slot="header" class="clearfix">
                                 <span>用户信息</span>
                             </div>
-                            <img class="loading-img" src="~Assets/img/content.png">
+                            <img  src="~Assets/img/content.png">
                         </el-card>
                         <el-card class="box-card" shadow="never">
                             <div slot="header" class="clearfix">
