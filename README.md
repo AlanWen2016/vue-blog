@@ -7,9 +7,9 @@ Simple blog base on Vue.js and Element UI
 .
 │── build/                                       // 基本配置
 │   ├── default.js                                // 默认配置
-│   ├── base.js                                   // 基础配置
-│   ├── dev.js                                    // 开发环境配置
-│   └── dist.js                                   // 构建任务配置
+│   ├── webpack.base.js                           // 基础配置
+│   ├── webpack.dev.js                             // 开发环境配置
+│   └── webpack.prod.js                            // 构建任务配置
 |—— dist/                                         //webpack 构建输出的目录
 ├── src/                                          // 源码目录
 │   ├── components/                               // 组件
@@ -25,7 +25,7 @@ Simple blog base on Vue.js and Element UI
 |   |—— directives/                               //自定义指令
 |   |—— filters/                                  //vue 过滤器
 │   ├── App.vue                                   // 页面入口文件
-│   └── main.js                                   // 程序入口文件，加载各种公共组件
+│   └── index.js                                   // 程序入口文件，加载各种公共组件
 ├── favicon.ico                                   // 图标
 ├── index.html                                    // 入口html文件
 .
