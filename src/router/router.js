@@ -11,7 +11,7 @@ export default {
                 {
                     path: '/user',
                     name : 'user-user',
-                    component : () => import(/* webpackChunkName: "pages/user */'../pages/user/uesr.vue'),
+                    component : () => import(/* webpackChunkName: "pages/user" */'../pages/user/uesr.vue'),
                     meta : { keepAlive: false, title:'用户管理',noTpl:true},
                 },
                 {
