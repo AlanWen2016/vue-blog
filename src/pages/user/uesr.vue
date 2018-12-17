@@ -31,6 +31,7 @@
 
 
 <script>
+// import mock from 'Mock/mock.js';
 import axios from 'axios';
 import { mapState } from 'vuex';
 import {UserInfo} from 'Services/getData.js';
@@ -45,20 +46,27 @@ export default {
 
     },
     created(){
+        axios.get('user/info')
+				.then(res => {
+					console.log(res.data);
+					this.info = res.data;
+					console.log(this.info,1324)
+				})
         // console.log(this.$route.meta.menu)
     },
     mounted() {
+
         this.getData();
         console.log(this.$store)
         axios.get('https://api.coindesk.com/v1/bpi/currentprice.json').then(response => (
             this.info = response
-            ))
+        ))
 
     },
     methods: {
         async getData(){
             let res = await UserInfo();
-            console.log(res.data);
+            console.log(res.data,3333);
         },
         increment () {
             this.$store.commit('increment')

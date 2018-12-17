@@ -69,8 +69,8 @@ module.exports = {
             }
         ]
     }
-    
-    
+
+
       ]
   },
   plugins: [
@@ -82,9 +82,9 @@ module.exports = {
         template: path.resolve(__dirname, '../index.html'),
       }),
   ],// 插件
-  resolve: { 
+  resolve: {
     extensions : ['.js', '.jsx', '.vue', 'vue'],
-    alias: { 
+    alias: {
       'vue': 'vue/dist/vue.js',
       'Pages' : path.resolve(srcPath, 'pages/'),
       'Services' : path.resolve(srcPath, 'services/'),
@@ -92,6 +92,7 @@ module.exports = {
       'Stores' : path.resolve(srcPath, 'stores/'),
       'Libs' : path.resolve(srcPath, 'libs/'),
       'Assets' : path.resolve(srcPath, 'assets/'),
-   } 
+      'Mock' : path.resolve(srcPath, 'mock/'),
+   }
   }
 };
