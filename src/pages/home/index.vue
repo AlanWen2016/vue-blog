@@ -1,7 +1,7 @@
 <template>
     <div class="main-content">
         <el-row>
-            <el-col :span="22" v-for="o in 4" >
+            <el-col :span="22" v-for="o in 4" :key="o">
                 <el-card shadow="hover" style="height: 160px">
                     <el-row>
                         <el-col :span="24" class="blog-title">
