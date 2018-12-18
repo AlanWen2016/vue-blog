@@ -4,61 +4,13 @@
             <header-bar></header-bar>
         </el-header>
 
-        <el-row style="margin: 1em">
-            <el-col :span="16" :offset="4">
-                <el-container>
-                    <el-aside width="300px">
-                        <el-card class="box-card box-card-user-info" shadow="never">
-                            <div slot="header" class="clearfix">
-                                <span>用户信息</span>
-                            </div>
-                            <img  src="~Assets/img/content.png">
-                        </el-card>
-                        <el-card class="box-card" shadow="never">
-                            <div slot="header" class="clearfix">
-                                <span>博客标签</span>
-                            </div>
-                            <el-tag>标签一</el-tag>
-                            <el-tag type="success">标签二</el-tag>
-                            <el-tag type="info">标签三</el-tag>
-                            <el-tag type="warning">标签四</el-tag>
-                            <el-tag type="warning">标签四</el-tag>
-                            <el-tag type="warning">标签四</el-tag>   <el-tag>标签一</el-tag>
-                            <el-tag type="success">标签二</el-tag>
-                            <el-tag type="info">标签三</el-tag>
-                            <el-tag type="warning">标签四</el-tag>
-                            <el-tag type="warning">标签四</el-tag>
-                            <el-tag type="warning">标签四</el-tag>
-                        </el-card>
-                    </el-aside>
+        <el-main style="margin: 1em">
+            <router-view></router-view>
+        </el-main>
 
-                    <el-container class="el-main-right">
-                        <!-- 右边主体[[ -->
-                        <router-view></router-view>
-                        <!-- 右边主体]] -->
-                    </el-container>
-                </el-container>
-                <div class="line"></div>
-                <el-footer style="height: auto">
-                    <div style="padding: 2em">
-                        <p>© 2018
-                            <a href="http://alanwen.online">焦糖瓜子在线</a>
-                            <span style="font-size:0.9em;margin-left: 1em">
-                            Designed by
-                            <span style="color: #e27575;font-size: 14px;">❤</span>
-                            <a href="https://github.com/AlanWen2016" target="_blank" style="color:inherit">AlanWen</a>
-                            </span>
-                            <a href="https://github.com/AlanWen2016/vue-blog" target="_blank">
-                                <img class="github" src="~Assets/img/icon/GitHub-Mark-32px.png">
-                            </a>
-                        </p>
-                        <p style="margin-top: 1em">
-                            <a href="http://www.miitbeian.gov.cn">粤ICP备18151066号-1</a>
-                        </p>
-                    </div>
-                </el-footer>
-            </el-col>
-        </el-row>
+        <el-footer style="height: auto">
+            <layout-footer></layout-footer>
+        </el-footer>
     </el-container>
 
 </template>
@@ -118,6 +70,7 @@
 
 <script>
 import headerBar from './header';
+import layoutFooter from './footer.vue'
 export default {
     data() {
         return {
@@ -127,7 +80,8 @@ export default {
         }
     },
     components:{
-        headerBar
+        headerBar,
+        layoutFooter
     },
     created(){
         // console.log(this.$route.meta.menu)

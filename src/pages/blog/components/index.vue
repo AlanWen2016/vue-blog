@@ -80,6 +80,7 @@
 <script>
 
 export default {
+    name:"blog-index",
     data() {
         return {
             info: {},
