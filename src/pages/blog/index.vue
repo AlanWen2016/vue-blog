@@ -29,7 +29,7 @@
 
                 <el-container class="el-main-right">
                     <!-- 右边主体[[ -->
-                    <blog-index></blog-index>
+                    <router-view></router-view>
                     <!-- 右边主体]] -->
                 </el-container>
             </el-container>
@@ -44,11 +44,5 @@
 </style>
 
 <script>
-    import blogIndex from './components/index.vue'
 
-    export default {
-        components:{
-            blogIndex
-        }
-    }
 </script>
