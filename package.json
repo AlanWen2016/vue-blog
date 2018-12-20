@@ -43,6 +43,7 @@
     "axios": "^0.18.0",
     "babel": "^6.23.0",
     "element-ui": "^2.4.11",
+    "mavon-editor": "^2.6.17",
     "mockjs": "^1.0.1-beta3",
     "postcss-loader": "^3.0.0",
     "url-loader": "^1.1.2",

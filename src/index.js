@@ -5,10 +5,13 @@ import routerConfig from './router/router.js'
 import Vuex from 'vuex'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(ElementUI);
+Vue.use(mavonEditor);
 const store = new Vuex.Store({
   state: {
     count: 0,
