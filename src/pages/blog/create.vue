@@ -58,24 +58,6 @@
                                     @close="deleteTag(tag)">
                                 {{tag.value}}
                             </el-tag>
-                            <!--<el-input style="float: right"
-                                    class="input-new-tag"
-                                    v-if="inputVisible"
-                                    v-model="inputValue"
-                                    ref="saveTagInput"
-                                    size="small"
-                                    @keyup.enter.native="handleInputConfirm"
-                                    @blur="handleInputConfirm"
-                            >
-                            </el-input>-->
-                            <!--<el-select style="float: right"
-                                    v-model="inputValue"
-                                    placeholder="请选择"
-                                    v-if="inputVisible"
-                                    size="mini"
-                                    ref="saveTagInput"
-                                    @keyup.enter.native="handleInputConfirm"
-                                    @blur="handleInputConfirm">-->
                             <el-select
                                        style="float: right;width: 100px"
                                        v-model="inputValue"
@@ -89,7 +71,6 @@
                                         :value="item">
                                 </el-option>
                             </el-select>
-                           <!-- <el-button  style="float: right" v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>-->
                         </div>
                         <div style="margin-top: 3em">
 
@@ -126,7 +107,6 @@
                 dynamicTags: [],
                 inputVisible: true,
                 inputValue: "",
-                /*tages:["javasrcipt","java","php","go","python"]*/
                 tages:[
                     {
                         id:1,
@@ -164,9 +144,6 @@
 
             showInput() {
                 this.inputVisible = true;
-                /*this.$nextTick(_ => {
-                    this.$refs.saveTagInput.$refs.select.focus();
-                });*/
             },
 
             handleInputConfirm() {
@@ -176,7 +153,6 @@
                         this.dynamicTags.push(inputValue);
                     }
                 }
-                //this.inputVisible = false;
                 this.inputValue = '';
             },
         }
