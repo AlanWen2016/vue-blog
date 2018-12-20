@@ -50,7 +50,7 @@
                         <div style="margin-top: 3em">
                             <h1><b><i>添加标签</i></b></h1>
                             <el-tag
-                                    :key="tag"
+                                    :key="tag.id"
                                     v-for="tag in dynamicTags"
                                     closable
                                     :type="tag.type"
