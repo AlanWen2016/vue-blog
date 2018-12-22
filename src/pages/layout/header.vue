@@ -1,4 +1,5 @@
 <template>
+<div>
     <el-row :gutter="20">
         <el-col :span="4" :offset="4" style="height: 60px;font-size:24px;font-weight: bold; color: #e6a23c">
             <div style="width:250px;height:60px">
@@ -21,16 +22,54 @@
                     <el-menu-item index="2-2">选项2</el-menu-item>
                     <el-menu-item index="2-3">选项3</el-menu-item>
                 </el-submenu>
-                <div style="display: inline-block;line-height: 60px;float: right">
-                    <el-input placeholder="请输入内容" v-model="input5" class="input-with-select">
+
+
+                <div style="display: inline-block;line-height: 60px;margin-left: 4em;">
+                    <el-input placeholder="请输入内容" v-model="searchVal" class="input-with-select">
                         <el-button slot="append" icon="el-icon-search"></el-button>
                     </el-input>
+                </div>
+                <div style="display: inline-block; line-height: 60px;float: right"> 
+                    <el-button @click="showLoginDialog">登录</el-button>
                 </div>
             </el-menu>
 
         </el-col>
     </el-row>
+    <el-dialog  :visible.sync="loginDialogVisible" center width="30%" class="login-dialog">
+        <el-tabs type="border-card">
+                <el-tab-pane label="第三方登录">QQ登录</el-tab-pane>
+                <el-tab-pane label="账号登录">
+                      <el-form :model="form">
+                        <el-form-item label="账户：" :label-width="formLabelWidth">
+                        <el-input v-model="form.name" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <el-form-item label="密码：" :label-width="formLabelWidth">
+                        <el-input v-model="form.password" autocomplete="off"></el-input>
+                        </el-form-item>
+                         <el-form-item style="text-align:center">
+                              <el-button type="primary" @click="loginDialogVisible = false">登录</el-button>
+                                <el-button @click="loginDialogVisible = false">注册</el-button>
+                                
+                         </el-form-item>
+                        </el-form>
+                      
+                </el-tab-pane>
+    
+        </el-tabs>
+         <div slot="footer" class="dialog-footer">
+                         
+        </div>
+    </el-dialog>
+    </div>
 </template>
+
+<style scoped>
+    .login-dialog .el-form-item{
+        margin-right: 2em
+    }
+   
+</style>
 
 <script>
     export default {
@@ -39,10 +78,26 @@
             return {
                 activeIndex: '1',
                 activeIndex2: '1',
-                input5:''
+                searchVal:'',
+                loginDialogVisible:false,
+                form: {
+                    name: '',
+                    region: '',
+                    date1: '',
+                    date2: '',
+                    delivery: false,
+                    type: [],
+                    resource: '',
+                    desc: ''
+                },
+                formLabelWidth: '120px',
             }
         },
         methods: {
+            showLoginDialog() {
+                this.loginDialogVisible = true;
+                
+            },
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
             },
@@ -55,7 +110,3 @@
         },
     }
 </script>
-
-<style scoped>
-   
-</style>
