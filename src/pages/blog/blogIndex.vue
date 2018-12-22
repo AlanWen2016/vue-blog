@@ -51,7 +51,7 @@
     .blog-content .content{line-height: 20px;font-size: 14px}
      .cat {
         color: #fff;
-        background-color: rgb(230, 162, 60);
+        background-color: #409EFF;
         padding: 3px 6px;
         font-size: 14px;
         display: inline-block;
@@ -68,7 +68,7 @@
         width: 0;
         height: 0;
         vertical-align: middle;
-        border-left: 4px solid rgb(230, 162, 60);
+        border-left: 4px solid #409EFF;
         border-top: 4px solid transparent;
         border-bottom: 4px solid transparent;
     }
