@@ -29,7 +29,7 @@
                         <el-button slot="append" icon="el-icon-search"></el-button>
                     </el-input>
                 </div>
-                <div style="display: inline-block; line-height: 60px;float: right"> 
+                <div style="display: inline-block; line-height: 60px;float: right">
                     <el-button @click="showLoginDialog">登录</el-button>
                 </div>
             </el-menu>
@@ -37,28 +37,46 @@
         </el-col>
     </el-row>
     <el-dialog  :visible.sync="loginDialogVisible" center width="30%" class="login-dialog">
-        <el-tabs type="border-card">
-                <el-tab-pane label="第三方登录">QQ登录</el-tab-pane>
-                <el-tab-pane label="账号登录">
-                      <el-form :model="form">
-                        <el-form-item label="账户：" :label-width="formLabelWidth">
+        <el-tabs type="border-card" v-model="activeLoginTab">
+            <el-tab-pane label="第三方登录" name="qq">QQ登录</el-tab-pane>
+            <el-tab-pane label="账号登录" name="login">
+                <el-form :model="form">
+                    <el-form-item label="账户：" :label-width="formLabelWidth">
                         <el-input v-model="form.name" autocomplete="off"></el-input>
-                        </el-form-item>
-                        <el-form-item label="密码：" :label-width="formLabelWidth">
-                        <el-input v-model="form.password" autocomplete="off"></el-input>
-                        </el-form-item>
-                         <el-form-item style="text-align:center">
-                              <el-button type="primary" @click="loginDialogVisible = false">登录</el-button>
-                                <el-button @click="loginDialogVisible = false">注册</el-button>
-                                
-                         </el-form-item>
-                        </el-form>
-                      
-                </el-tab-pane>
-    
+                    </el-form-item>
+                    <el-form-item label="密码：" :label-width="formLabelWidth">
+                        <el-input v-model="form.password" autocomplete="off" type="password"></el-input>
+                    </el-form-item>
+                    <el-form-item style="text-align:center">
+                        <el-button type="primary" @click="accountLogin">登录</el-button>
+                    </el-form-item>
+                </el-form>
+            </el-tab-pane>
+            <el-tab-pane label="账号注册" name="register">
+                <el-form :model="form">
+                    <el-form-item label="账户：" :label-width="formLabelWidth">
+                        <el-input v-model="form.name" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="邮箱：" :label-width="formLabelWidth">
+                        <el-input v-model="form.email" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="密码：" :label-width="formLabelWidth">
+                        <el-input v-model="form.password" autocomplete="off" type="password"></el-input>
+                    </el-form-item>
+                    <el-form-item label="确认密码：" :label-width="formLabelWidth">
+                        <el-input v-model="form.password_confirmation" autocomplete="off" type="password"></el-input>
+                    </el-form-item>
+                    <el-form-item style="text-align:center">
+                        <el-button type="primary" @click="loginDialogVisible = false">登录</el-button>
+                        <el-button @click="loginDialogVisible = false">注册</el-button>
+                    </el-form-item>
+                </el-form>
+
+            </el-tab-pane>
+
         </el-tabs>
-         <div slot="footer" class="dialog-footer">
-                         
+        <div slot="footer" class="dialog-footer">
+
         </div>
     </el-dialog>
     </div>
@@ -68,10 +86,11 @@
     .login-dialog .el-form-item{
         margin-right: 2em
     }
-   
+
 </style>
 
 <script>
+    import {AccountLogin} from 'Services/getData.js';
     export default {
         name: "header-bar",
         data() {
@@ -82,21 +101,29 @@
                 loginDialogVisible:false,
                 form: {
                     name: '',
-                    region: '',
-                    date1: '',
-                    date2: '',
-                    delivery: false,
-                    type: [],
-                    resource: '',
-                    desc: ''
+                    email: '',
+                    password: '',
+                    password_confirmation:''
                 },
                 formLabelWidth: '120px',
+                activeLoginTab: 'qq', // 登录弹窗active Tab
             }
+        },
+        mounted() {
+            this.form.name = 'Git';
+            this.form.password = '123456';
+            this.accountLogin();
         },
         methods: {
             showLoginDialog() {
                 this.loginDialogVisible = true;
-                
+            },
+            async accountLogin() {
+                if(this.activeLoginTab == 'login'){
+                    let {name, password} = this.form;
+                    let res = await AccountLogin({name, password});
+                    console.log(res);
+                }
             },
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);

@@ -7,6 +7,8 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+// 开启调试面板
+Vue.config.devtools = true;
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
