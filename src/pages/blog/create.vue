@@ -46,7 +46,9 @@
                 </el-aside>
                 <el-main style="padding: 0;overflow: hidden">
                     <el-card class="box-card" style="height: 100%;width: 100%">
-                        <mavon-editor style="height: 460px"/>
+                        <mavon-editor style="height: 460px"
+                           v-model="textValue"
+                           @imgAdd="imgAdd" @imgDel="imgDel"/>
                         <div style="margin-top: 3em">
                             <h1><b><i>添加标签</i></b></h1>
                             <el-tag
@@ -101,6 +103,9 @@
 </style>
 
 <script>
+    var mavonEditor = require('mavon-editor')
+    import 'mavon-editor/dist/css/index.css'
+
     export default {
         data() {
             return {
@@ -134,8 +139,12 @@
                         type:"danger"
                     }
 
-                ]
+                ],
+                textValue:""
             };
+        },
+        components: {
+            'mavon-editor': mavonEditor.mavonEditor
         },
         methods: {
             deleteTag(tag) {
@@ -155,6 +164,26 @@
                 }
                 this.inputValue = '';
             },
+            handleClick(){
+                alert(1);
+                alert(this.textValue);
+            },
+            imgAdd(pos, $file){
+                alert(1);
+                var formdata = new FormData();
+                formdata.append('image', $file);
+                axios({
+                    url: 'server url',
+                    method: 'post',
+                    data: formdata,
+                    headers: { 'Content-Type': 'multipart/form-data' },
+                }).then((url) => {
+                    $vm.$img2Url(pos, url);
+                })
+            },
+            imgDel(pos, $file){
+                alert(2);
+            }
         }
     }
 </script>
