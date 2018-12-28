@@ -20,7 +20,7 @@ module.exports = merge(common, {
                   '/**/**',
                   '/user/**',
               ],
-              target : 'http://alanwen.com', // target host
+              target : 'http://alanwen.online', // target host
               changeOrigin : true
           }
       ]

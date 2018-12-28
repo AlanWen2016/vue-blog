@@ -7,7 +7,8 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 // 开启调试面板
 Vue.config.devtools = true;
-
+window.domain = 'alanwen.online';
+document.domain = 'alanwen.online';
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
