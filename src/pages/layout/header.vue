@@ -67,8 +67,7 @@
                         <el-input v-model="form.password_confirmation" autocomplete="off" type="password"></el-input>
                     </el-form-item>
                     <el-form-item style="text-align:center">
-                        <el-button type="primary" @click="loginDialogVisible = false">登录</el-button>
-                        <el-button @click="loginDialogVisible = false">注册</el-button>
+                        <el-button @click="accountRegister">注册</el-button>
                     </el-form-item>
                 </el-form>
 
@@ -90,7 +89,7 @@
 </style>
 
 <script>
-    import {AccountLogin} from 'Services/getData.js';
+    import {AccountLogin,AccountRegister} from 'Services/getData.js';
     export default {
         name: "header-bar",
         data() {
@@ -112,11 +111,16 @@
         mounted() {
             this.form.name = 'Git';
             this.form.password = '123456';
-            this.accountLogin();
+            // this.accountLogin();
         },
         methods: {
             showLoginDialog() {
                 this.loginDialogVisible = true;
+            },
+            async accountRegister(){
+                let {name, password, email} = this.form;
+                let res = await AccountRegister({name, password, email});
+                console.log(res);
             },
             async accountLogin() {
                 if(this.activeLoginTab == 'login'){

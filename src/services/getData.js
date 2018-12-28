@@ -4,4 +4,5 @@ import { urlPrefix } from './config.js';
 
 // 获取用户信息
 export const UserInfo = () => axios.get(`${urlPrefix}/user/info`);
-export const AccountLogin = (params) => axios.post(`${urlPrefix}/user/login`,{params:params});
+export const AccountRegister = (params) => axios.post(`${urlPrefix}/user/register`,params);
+export const AccountLogin = (params) => axios.post(`${urlPrefix}/user/login`,params);

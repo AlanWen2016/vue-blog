@@ -46,17 +46,17 @@ export default {
 
     },
     created(){
-        axios.get('user/info')
-				.then(res => {
-					console.log(res.data);
-					this.info = res.data;
-					console.log(this.info,1324)
-				})
-        console.log(this.$route.meta.menu)
+        // axios.get('user/info')
+			// 	.then(res => {
+			// 		console.log(res.data);
+			// 		this.info = res.data;
+			// 		console.log(this.info,1324)
+			// 	})
+        // console.log(this.$route.meta.menu)
     },
     mounted() {
 
-        // this.getData();
+         this.getData();
         console.log(this.$store)
         axios.get('https://api.coindesk.com/v1/bpi/currentprice.json').then(response => (
             this.info = response
