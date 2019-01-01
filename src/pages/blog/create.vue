@@ -74,8 +74,12 @@
                                 </el-option>
                             </el-select>
                         </div>
-                        <div style="margin-top: 3em">
-
+                        <div style="margin-top: 3em;width: 100%;text-align: center">
+                            <el-row>
+                                <el-button type="danger" @click="commit">发布博客</el-button>
+                                <el-button type="danger">保存为草稿</el-button>
+                                <el-button>返回</el-button>
+                            </el-row>
                         </div>
                     </el-card>
                 </el-main>
@@ -105,6 +109,8 @@
 <script>
     var mavonEditor = require('mavon-editor')
     import 'mavon-editor/dist/css/index.css'
+    import axios from 'axios'
+    import {saveBlog} from 'Services/getData.js'
 
     export default {
         data() {
@@ -164,12 +170,7 @@
                 }
                 this.inputValue = '';
             },
-            handleClick(){
-                alert(1);
-                alert(this.textValue);
-            },
             imgAdd(pos, $file){
-                alert(1);
                 var formdata = new FormData();
                 formdata.append('image', $file);
                 axios({
@@ -183,6 +184,12 @@
             },
             imgDel(pos, $file){
                 alert(2);
+            },
+            async commit(){
+                let params = {textValue:this.textValue};
+                console.log(params);
+                let res = await saveBlog(params)
+                console.log(res);
             }
         }
     }
