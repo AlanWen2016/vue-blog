@@ -78,7 +78,7 @@
 
 
 <script>
-
+    import {BlogList} from 'Services/getData.js';
 export default {
     name:"blog-index",
     data() {
@@ -104,10 +104,17 @@ export default {
         // console.log(this.$route.meta.menu)
     },
     mounted() {
-
+        this.getBlogList();
 
     },
     methods: {
+        async getBlogList() {
+            let res = await BlogList();
+            console.log(res);
+            if(res.status === 200 && res.data.code === 0){
+
+            }
+        },
         viewBlogDetail() {
             this.$router.history.push({
                 path:'/blog/detail',

@@ -2,8 +2,8 @@
         <div class="g-main f-clearfix">
             <h3>router: user</h3>
             <div class="box1">
-                <input type="text" v-focus>
-                <input type="text" v-demo="{ color: 'white', text: 'hello!' }">
+                <!--<input type="text" v-focus>-->
+                <!--<input type="text" v-demo="{ color: 'white', text: 'hello!' }">-->
             </div>
             <div>
                 {{info}}
@@ -57,10 +57,7 @@ export default {
     mounted() {
 
          this.getData();
-        console.log(this.$store)
-        axios.get('https://api.coindesk.com/v1/bpi/currentprice.json').then(response => (
-            this.info = response
-        ))
+
 
     },
     methods: {

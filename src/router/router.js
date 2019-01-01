@@ -24,21 +24,19 @@ export default {
         },
         {
             path: '/',
-            name : 'home-index',
             component : () => import(/* webpackChunkName: "pages/layout" */'../pages/layout/layout.vue'),
             meta : { keepAlive: false, title:'首页',noTpl:true},
             children: [
                 {
                     path: '/',
-                    name : 'home-index',
                     component : () => import(/* webpackChunkName: "pages/home/" */'../pages/blog/index.vue'),
-                    meta : { keepAlive: false, title:'首页列表',noTpl:true},
+                    meta : { keepAlive: false, title:'首页',noTpl:true},
                     children: [
                         {
                             path: '/',
-                            name: 'blog-index',
-                            component : () => import('../pages/blog/blogIndex.vue'),
-                            meta : { keepAlive: false, title:'首页列表',noTpl:true},
+                            name: 'blog-list',
+                            component : () => import('../pages/blog/blogList.vue'),
+                            meta : { keepAlive: false, title:'内容列表',noTpl:true},
                         },
                         {
                             path: '/blog/detail',
