@@ -110,7 +110,7 @@
     var mavonEditor = require('mavon-editor')
     import 'mavon-editor/dist/css/index.css'
     import axios from 'axios'
-    import {saveBlog} from 'Services/getData.js'
+    import {SaveBlog} from 'Services/getData.js'
 
     export default {
         data() {
@@ -188,7 +188,7 @@
             async commit(){
                 let params = {textValue:this.textValue};
                 console.log(params);
-                let res = await saveBlog(params)
+                let res = await SaveBlog(params);
                 console.log(res);
             }
         }

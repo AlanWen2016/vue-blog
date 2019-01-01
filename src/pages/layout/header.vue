@@ -120,6 +120,7 @@
                 this.loginDialogVisible = true;
             },
             async accountRegister(){
+                let {name, password, email} = this.form;
                 let res = await AccountRegister(this.form);
                 console.log(res);
             },
