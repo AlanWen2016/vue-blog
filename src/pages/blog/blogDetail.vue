@@ -3,15 +3,15 @@
         <div class="main-content">
             <el-row>
                 <el-col :span="24" class="blog-title">
-                    <span class="title">由type属性来选择tag的类型，也可以通过color属性来自定义背景色</span>
+                    <span class="title">{{ blogInfo.title }}</span>
                 </el-col>
             </el-row>
 
             <el-row>
                 <el-col :span="24"  class="blog-info">
                     <div>
-                        <i class="el-icon-time"></i><span>2018-11-28</span>
-                        <i class="el-icon-edit-outline"></i><span>焦糖瓜子</span>
+                        <i class="el-icon-time"></i><span>{{ blogInfo.updated_at.substr(0,10) }}</span>
+                        <i class="el-icon-edit-outline"></i><span>{{ blogInfo.creator }}</span>
                         <i class="el-icon-view"></i><span>阅读（154）</span>
                     </div>
                 </el-col>
@@ -19,9 +19,7 @@
             <div class="line"></div>
             <el-row>
                 <el-col :span="24" class="blog-content">
-                    <div class="content">
-                        一、前言 文章更新于2018年11月04日 基于webpack4.x Webpack 是当下最热门的前端资源模块化管理和打包工具。
-                        它可以将许多松散的模块按照依赖和规则打包成符合生产环境部署的前端资源。还可以将按需加载的模块进行代码分隔，等到...
+                    <div class="content" style="min-width: 800px;" v-html="blogInfo.content">
                     </div>
                 </el-col>
             </el-row>
@@ -46,22 +44,11 @@
 </style>
 
 <script>
-
+    import {BlogInfo} from 'Services/getData.js';
 export default {
     data() {
         return {
-            info: {},
-             form: {
-                name: '',
-                region: '',
-                date1: '',
-                date2: '',
-                delivery: false,
-                type: [],
-                resource: '',
-                desc: ''
-        }
-
+            blogInfo: {},
         }
     },
     components:{
@@ -71,12 +58,19 @@ export default {
         // console.log(this.$route.meta.menu)
     },
     mounted() {
-
-
+        let id = this.$route.query.id;
+        this.getBlogInfo(id);
     },
     methods: {
-        onSubmit() {
-
+        async getBlogInfo(id){
+            try {
+                let res = await BlogInfo({id});
+                if(res.status === 200){
+                    this.blogInfo = res.data;
+                }
+            }catch (err){
+                console.log(err);
+            }
         }
     },
 

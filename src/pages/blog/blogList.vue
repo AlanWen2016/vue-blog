@@ -1,19 +1,24 @@
 <template>
     <div class="main-content">
-        <el-row>
-            <el-col :span="22" v-for="o in 4" :key="o">
+        <div style="display: inline-block;line-height: 60px;">
+            <el-input placeholder="请输入内容" v-model="params.title" class="input-with-select search-input">
+                <el-button slot="append" icon="el-icon-search" @click="getBlogList"></el-button>
+            </el-input>
+        </div>
+        <el-row v-loading="loading">
+            <el-col :span="22" v-for="blog in blogList" :key="blog.id">
                 <el-card shadow="hover" style="height: 160px">
                     <el-row>
                         <el-col :span="24" class="blog-title">
                             <a class="cat">javascript<i></i></a>
-                            <span class="title" @click="viewBlogDetail()">由type属性来选择tag的类型，也可以通过color属性来自定义背景色</span>
+                            <span class="title" @click="viewBlogDetail(blog.id)">{{ blog.title }}</span>
                         </el-col>
                     </el-row>
                     <el-row>
                         <el-col :span="24"  class="blog-info">
                             <div>
-                                <i class="el-icon-time"></i><span>2018-11-28</span>
-                                <i class="el-icon-edit-outline"></i><span>焦糖瓜子</span>
+                                <i class="el-icon-time"></i><span>{{ blog.updated_at }}</span>
+                                <i class="el-icon-edit-outline"></i><span>{{ blog.creator }}</span>
                                 <i class="el-icon-view"></i><span>阅读（154）</span>
                             </div>
                         </el-col>
@@ -21,8 +26,7 @@
                     <el-row>
                         <el-col :span="24" class="blog-content">
                             <div class="content">
-                                一、前言 文章更新于2018年11月04日 基于webpack4.x Webpack 是当下最热门的前端资源模块化管理和打包工具。
-                                它可以将许多松散的模块按照依赖和规则打包成符合生产环境部署的前端资源。还可以将按需加载的模块进行代码分隔，等到...
+                              {{ blog.summary }}
                             </div>
                         </el-col>
                     </el-row>
@@ -30,10 +34,17 @@
             </el-col>
         </el-row>
         <el-pagination
+                style="margin-top: 1em"
                 background
-                layout="prev, pager, next"
-                :total="1000">
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page.sync="pagination.currentPage"
+                :page-sizes="[10, 20,50]"
+                :page-size="10"
+                layout="sizes, prev, pager, next"
+                :total="pagination.total">
         </el-pagination>
+
     </div>
 </template>
 <style lang="scss" scoped>
@@ -73,6 +84,7 @@
         border-bottom: 4px solid transparent;
     }
     .el-pagination{margin-top: 2em}
+    .search-input{width: 600px}
 </style>
 
 
@@ -93,7 +105,18 @@ export default {
                 type: [],
                 resource: '',
                 desc: ''
-        }
+            },
+            params: {
+                title: '',
+                page: 1,
+                pageSize: 10
+            },
+            pagination: {
+                total: 0,
+                currentPage: 1,
+            },
+            blogList: [],
+            loading: false
 
         }
     },
@@ -109,20 +132,35 @@ export default {
     },
     methods: {
         async getBlogList() {
-            let res = await BlogList();
-            console.log(res);
-            if(res.status === 200 && res.data.code === 0){
-
+            this.loading = true;
+            try {
+                let res = await BlogList(this.params);
+                this.loading = false;
+                if(res.status === 200){
+                    this.blogList = res.data.data;
+                    this.pagination.total = res.data.total;
+                }
+            }catch (err){
+                this.loading = true;
+                console.log(err);
             }
+
+
         },
-        viewBlogDetail() {
+        viewBlogDetail(id) {
             this.$router.history.push({
                 path:'/blog/detail',
-                query: {
-                    id: 1234,
-                },
+                query: {id: id,}
             })
-        }
+        },
+        handleSizeChange(val) {
+            this.params.pageSize = val;
+            this.getBlogList();
+        },
+        handleCurrentChange(val) {
+            this.params.page = val;
+            this.getBlogList();
+        },
     },
 
 }
