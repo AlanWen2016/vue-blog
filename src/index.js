@@ -59,18 +59,18 @@ const router = new VueRouter(
 )
 
 // 路由守卫
-router.beforeEach(async (to, from, next)=>{
-  // 未匹配规则，跳转到首页
-    if(to.matched.length === 0){
+router.beforeEach(async (to, from, next) => {
+    // 未匹配规则，跳转到首页
+    if (to.matched.length === 0) {
         location.href = `${document.location.protocol}// ${document.location.hostname}`;
         return;
     }
     // 登陆判断, 写入需要登陆
-    if(!store.state.login && to.name == 'create'){
+    if (!store.state.login && to.name == 'create') {
         await store.dispatch({type: 'getUserInfo'});
     }
     next();
-})
+});
 
 
 // 4. 创建和挂载根实例。
