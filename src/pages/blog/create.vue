@@ -110,12 +110,14 @@
     var mavonEditor = require('mavon-editor')
     import 'mavon-editor/dist/css/index.css'
     import axios from 'axios'
+    import qs from 'qs';
     import {SaveBlog} from 'Services/getData.js'
 
     export default {
         data() {
             return {
                 dynamicTags: [],
+                dynamicTagIds:[],
                 inputVisible: true,
                 inputValue: "",
                 tages:[
@@ -154,7 +156,9 @@
         },
         methods: {
             deleteTag(tag) {
-                this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+                var index = this.dynamicTags.indexOf(tag);
+                this.dynamicTags.splice(index, 1);
+                this.dynamicTagIds.splice(index, 1);
             },
 
             showInput() {
@@ -166,6 +170,7 @@
                 if (inputValue) {
                     if(this.dynamicTags.indexOf(inputValue) == -1){
                         this.dynamicTags.push(inputValue);
+                        this.dynamicTagIds.push(inputValue.id);
                     }
                 }
                 this.inputValue = '';
@@ -186,9 +191,15 @@
                 alert(2);
             },
             async commit(){
-                let params = {textValue:this.textValue};
+                if(this.dynamicTags.length == 0){
+                    alert("请选择标签");
+                    return;
+                }
+                let params = qs.stringify({textValue:this.textValue,dynamicTagIds:this.dynamicTagIds}, { indices: false });
                 console.log(params);
                 let res = await SaveBlog(params);
+                alert(1);
+                alert(res);
                 console.log(res);
             }
         }
