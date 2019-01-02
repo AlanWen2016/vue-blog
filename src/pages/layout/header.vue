@@ -4,7 +4,7 @@
         <el-col :span="4" :offset="4" style="height: 60px;font-size:24px;font-weight: bold; color: #e6a23c">
             <div style="width:250px;height:60px">
                 <router-link to="/">
-                    <img class="img-logo" src="~Assets/img/logo/logo_v2_1.png">
+                    <!--<img class="img-logo" src="~Assets/img/logo/logo_v2_1.png">-->
                 </router-link>
             </div>
         </el-col>
@@ -26,11 +26,11 @@
                 </el-submenu>
 
 
-                <div style="display: inline-block;line-height: 60px;margin-left: 4em;">
-                    <el-input placeholder="请输入内容" v-model="searchVal" class="input-with-select">
-                        <el-button slot="append" icon="el-icon-search"></el-button>
-                    </el-input>
-                </div>
+                <!--<div style="display: inline-block;line-height: 60px;margin-left: 4em;">-->
+                    <!--<el-input placeholder="请输入内容" v-model="searchVal" class="input-with-select">-->
+                        <!--<el-button slot="append" icon="el-icon-search"></el-button>-->
+                    <!--</el-input>-->
+                <!--</div>-->
                 <div style="display: inline-block; line-height: 60px;float: right">
                     <el-button @click="showLoginDialog">登录</el-button>
                 </div>
