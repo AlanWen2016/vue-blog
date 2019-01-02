@@ -1,31 +1,30 @@
 <template>
-    <div>
-        <div class="main-content">
-            <el-row>
-                <el-col :span="24" class="blog-title">
-                    <span class="title">{{ blogInfo.title }}</span>
-                </el-col>
-            </el-row>
+<div>
+    <div class="main-content">
+        <el-row>
+            <el-col :span="24" class="blog-title">
+                <span class="title">{{ blogInfo.title }}</span>
+            </el-col>
+        </el-row>
 
-            <el-row>
-                <el-col :span="24"  class="blog-info">
-                    <div>
-                        <i class="el-icon-time"></i><span>{{ blogInfo.updated_at.substr(0,10) }}</span>
-                        <i class="el-icon-edit-outline"></i><span>{{ blogInfo.creator }}</span>
-                        <i class="el-icon-view"></i><span>阅读（154）</span>
-                    </div>
-                </el-col>
-            </el-row>
-            <div class="line"></div>
-            <el-row>
-                <el-col :span="24" class="blog-content">
-                    <div class="content" style="min-width: 800px;" v-html="blogInfo.content">
-                    </div>
-                </el-col>
-            </el-row>
-        </div>
+        <el-row>
+            <el-col :span="24"  class="blog-info">
+                <div>
+                    <i class="el-icon-time"></i><span>{{ blogInfo.updated_at ? blogInfo.updated_at.substr(0,10) : '' }}</span>
+                    <i class="el-icon-edit-outline"></i><span>{{ blogInfo.creator }}</span>
+                    <i class="el-icon-view"></i><span>阅读（154）</span>
+                </div>
+            </el-col>
+        </el-row>
+        <div class="line"></div>
+        <el-row>
+            <el-col :span="24" class="blog-content">
+                <div class="content" style="min-width: 800px;" v-html="blogInfo.content">
+                </div>
+            </el-col>
+        </el-row>
     </div>
-
+</div>
 </template>
 <style lang="scss" scoped>
     .main-content{
