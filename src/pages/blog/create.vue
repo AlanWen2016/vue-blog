@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col :span="16" :offset="4">
-            <el-container style="height: 50em">
+            <el-container style="height: 52em">
                 <el-aside width="200px" style="overflow: hidden">
                     <el-card class="box-card" style="width: 200px;height: 100%;padding: 0;margin: 0">
                         <el-menu style="border: 0">
@@ -46,10 +46,15 @@
                 </el-aside>
                 <el-main style="padding: 0;overflow: hidden">
                     <el-card class="box-card" style="height: 100%;width: 100%">
-                        <mavon-editor style="height: 460px"
+                        <el-input
+                                placeholder="请输入标题"
+                                v-model="title"
+                                clearable>
+                        </el-input>
+                        <mavon-editor style="height: 460px;margin-top: 1em"
                            v-model="textValue"
                            @imgAdd="imgAdd" @imgDel="imgDel"/>
-                        <div style="margin-top: 3em">
+                        <div style="margin-top: 2em">
                             <h1><b><i>添加标签</i></b></h1>
                             <el-tag
                                     :key="tag.id"
@@ -77,8 +82,10 @@
                         <div style="margin-top: 3em;width: 100%;text-align: center">
                             <el-row>
                                 <el-button type="danger" @click="commit">发布博客</el-button>
-                                <el-button type="danger">保存为草稿</el-button>
-                                <el-button>返回</el-button>
+                                <el-button type="danger" @click="saveAsDraft">保存为草稿</el-button>
+                                <router-link to='/'>
+                                    <el-button>返回</el-button>
+                                </router-link>
                             </el-row>
                         </div>
                     </el-card>
@@ -116,6 +123,7 @@
     export default {
         data() {
             return {
+                title:"",
                 dynamicTags: [],
                 dynamicTagIds:[],
                 inputVisible: true,
@@ -192,15 +200,25 @@
             },
             async commit(){
                 if(this.dynamicTags.length == 0){
-                    alert("请选择标签");
+                    this.$message({
+                        message: '请选择标签',
+                        type: 'warning',
+                    });
                     return;
                 }
-                let params = qs.stringify({textValue:this.textValue,dynamicTagIds:this.dynamicTagIds}, { indices: false });
-                console.log(params);
+                let params = qs.stringify({title:this.title,textValue:this.textValue,dynamicTagIds:this.dynamicTagIds}, { indices: false });
                 let res = await SaveBlog(params);
-                alert(1);
-                alert(res);
                 console.log(res);
+            },
+            async saveAsDraft(){
+                if(this.dynamicTags.length == 0){
+                    this.$message({
+                        message: '请选择标签',
+                        type: 'warning',
+                    });
+                    return;
+                }
+                let params = qs.stringify({title:this.title,textValue:this.textValue,dynamicTagIds:this.dynamicTagIds}, { indices: false });
             }
         }
     }
