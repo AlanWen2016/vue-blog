@@ -13,3 +13,4 @@ export const BlogInfo = (params) => axios.get(`${urlPrefix}/blog/info`, {params 
 //新增内容模块
 export const SaveBlog = (params) => axios.post(`${urlPrefix}:8080/blog/saveBlog`, params);
 export const SaveAsDraft = (params) => axios.post(`${urlPrefix}:8080/blog/saveAsDraft`,params);
+export const ImgAdd = (params) => axios({url:`${urlPrefix}:8080/blog/imgAdd`,method:"post",data:params,headers: { 'Content-Type': 'multipart/form-data' }})

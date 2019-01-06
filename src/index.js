@@ -23,9 +23,9 @@ const store = new Vuex.Store({
         increment (state) {
             state.count++
         },
-    decrement (state) {
-      state.count--
-    }
+        decrement (state) {
+            state.count--
+        }
   }
 })
 store.commit('increment');

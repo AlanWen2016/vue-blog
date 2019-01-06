@@ -118,7 +118,7 @@
     import 'mavon-editor/dist/css/index.css'
     import axios from 'axios'
     import qs from 'qs';
-    import {SaveBlog} from 'Services/getData.js'
+    import {SaveBlog,SaveAsDraft,ImgAdd} from 'Services/getData.js'
 
     export default {
         data() {
@@ -183,17 +183,13 @@
                 }
                 this.inputValue = '';
             },
-            imgAdd(pos, $file){
+            async imgAdd(pos, $file){
                 var formdata = new FormData();
-                formdata.append('image', $file);
-                axios({
-                    url: 'server url',
-                    method: 'post',
-                    data: formdata,
-                    headers: { 'Content-Type': 'multipart/form-data' },
-                }).then((url) => {
-                    $vm.$img2Url(pos, url);
-                })
+                formdata.append('file', $file);
+                console.log($file);
+                console.log(formdata);
+                let res = await ImgAdd(formdata);
+                $vm.$img2Url(pos, res);
             },
             imgDel(pos, $file){
                 alert(2);
@@ -219,6 +215,8 @@
                     return;
                 }
                 let params = qs.stringify({title:this.title,textValue:this.textValue,dynamicTagIds:this.dynamicTagIds}, { indices: false });
+                let res = await SaveAsDraft(params);
+                console.log(res);
             }
         }
     }
