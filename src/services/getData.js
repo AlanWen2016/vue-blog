@@ -1,6 +1,10 @@
 import axios from './axios';
 import { urlPrefix } from './config.js';
 
+// QQ登陆相关
+export const QQLoginUrl = () => axios(`${urlPrefix}/qq/login/url`);
+
+
 
 // 获取用户信息
 export const UserInfo = () => axios.get(`${urlPrefix}/user/info`);

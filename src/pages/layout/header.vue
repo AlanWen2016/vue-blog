@@ -4,7 +4,7 @@
         <el-col :span="4" :offset="4" style="height: 60px;font-size:24px;font-weight: bold; color: #e6a23c">
             <div style="width:250px;height:60px">
                 <router-link to="/">
-                    <!--<img class="img-logo" src="~Assets/img/logo/logo_v2_1.png">-->
+                    <img class="img-logo" src="~Assets/img/logo/logo_v2_1.png">
                 </router-link>
             </div>
         </el-col>
@@ -38,9 +38,11 @@
 
         </el-col>
     </el-row>
-    <el-dialog  :visible.sync="loginDialogVisible" center width="30%" class="login-dialog">
+    <el-dialog  :visible.sync="loginDialogVisible" center width="50%" class="login-dialog">
         <el-tabs type="border-card" v-model="activeLoginTab">
-            <el-tab-pane label="第三方登录" name="qq">QQ登录</el-tab-pane>
+            <el-tab-pane label="第三方登录" name="qq">
+                <iframe :src="qqLoginSrc" frameborder="0"  id="tgl-login__pop" width="640" height="580"  scrolling="no"></iframe>
+            </el-tab-pane>
             <el-tab-pane label="账号登录" name="login">
                 <el-form :model="form">
                     <el-form-item label="账户：" :label-width="formLabelWidth">
@@ -72,13 +74,9 @@
                         <el-button @click="accountRegister">注册</el-button>
                     </el-form-item>
                 </el-form>
-
             </el-tab-pane>
-
         </el-tabs>
-        <div slot="footer" class="dialog-footer">
-
-        </div>
+        <div slot="footer" class="dialog-footer"></div>
     </el-dialog>
     </div>
 </template>
@@ -87,11 +85,10 @@
     .login-dialog .el-form-item{
         margin-right: 2em
     }
-
 </style>
 
 <script>
-    import {AccountLogin,AccountRegister} from 'Services/getData.js';
+    import {AccountLogin,AccountRegister, QQLoginUrl} from 'Services/getData.js';
     export default {
         name: "header-bar",
         data() {
@@ -108,6 +105,7 @@
                 },
                 formLabelWidth: '120px',
                 activeLoginTab: 'qq', // 登录弹窗active Tab
+                qqLoginSrc: ''
             }
         },
         mounted() {
@@ -118,6 +116,14 @@
         methods: {
             showLoginDialog() {
                 this.loginDialogVisible = true;
+                this.getQQLoginUrl();
+
+            },
+            async getQQLoginUrl(){
+                this.qqLoginSrc = '';
+                let res = await QQLoginUrl();
+                this.qqLoginSrc = res.data.url;
+                console.log(res)
             },
             async accountRegister(){
                 let {name, password, email} = this.form;
