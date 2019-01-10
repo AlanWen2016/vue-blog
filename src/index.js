@@ -5,6 +5,7 @@ import routerConfig from './router/router.js'
 import Vuex from 'vuex'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
+import store from './stores/index'
 // 开启调试面板
 Vue.config.devtools = true;
 window.domain = 'alanwen.online';
@@ -13,7 +14,7 @@ document.domain = 'alanwen.online';
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(ElementUI);
-const store = new Vuex.Store({
+/*const store = new Vuex.Store({
     state: {
         count: 0,
         msg:'imessage',
@@ -29,7 +30,7 @@ const store = new Vuex.Store({
   }
 })
 store.commit('increment');
-console.log(store.state.count,'store') // -> 1
+console.log(store.state.count,'store') // -> 1*/
 
 // 0. 如果使用模块化机制编程，导入Vue和VueRouter，要调用 Vue.use(VueRouter)
 
@@ -66,7 +67,7 @@ router.beforeEach(async (to, from, next) => {
         return;
     }
     // 登陆判断, 写入需要登陆
-    if (!store.state.login && to.name == 'create') {
+    if (!store.state.status.login && to.name == 'create') {
         await store.dispatch({type: 'getUserInfo'});
     }
     next();

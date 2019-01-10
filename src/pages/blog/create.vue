@@ -195,6 +195,10 @@
                 alert(2);
             },
             async commit(){
+                if(!this.$store.state.status.login){
+                    this.$router.push('/');
+                    return;
+                }
                 if(this.dynamicTags.length == 0){
                     this.$message({
                         message: '请选择标签',
@@ -204,9 +208,13 @@
                 }
                 let params = qs.stringify({title:this.title,textValue:this.textValue,dynamicTagIds:this.dynamicTagIds}, { indices: false });
                 let res = await SaveBlog(params);
-                console.log(res);
+                console.log(res.data);
             },
             async saveAsDraft(){
+                if(!this.$store.state.status.login){
+                    this.$router.push('/');
+                    return;
+                }
                 if(this.dynamicTags.length == 0){
                     this.$message({
                         message: '请选择标签',
