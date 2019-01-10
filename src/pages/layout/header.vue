@@ -12,7 +12,9 @@
             <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                 <el-submenu index="1">
                     <template slot="title">博客</template>
-                    <el-menu-item index="2-1">选项1</el-menu-item>
+                    <router-link to='/create'>
+                        <el-menu-item index="2-1"><i class="el-icon-edit">写博客</i></el-menu-item>
+                    </router-link>
                     <el-menu-item index="2-2">选项2</el-menu-item>
                     <el-menu-item index="2-3">选项3</el-menu-item>
                 </el-submenu>

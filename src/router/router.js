@@ -1,3 +1,5 @@
+import store from '../stores/index'
+
 export default {
     routes : [
 
@@ -51,7 +53,13 @@ export default {
                     name : 'home-create',
                     component : () => import('../pages/blog/create.vue'),
                     meta : { keepAlive: false, title:'内容添加',noTpl:true},
-
+                    beforeEnter:(to,from,next) => {
+                        if(store.state.status.login){
+                            next();
+                        }else {
+                            next(false);
+                        }
+                    }
                 }
             ]
 
