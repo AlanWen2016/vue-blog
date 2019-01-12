@@ -18,9 +18,9 @@ module.exports = merge(common, {
           {
               path : [
                   '/**/**',
-                  // '/user/**',
+                  '/user/**',
               ],
-              target : 'http://laravel-blog.com', // target host
+              target : 'http://alanwen.online', // target host
               changeOrigin : true
           }
       ]

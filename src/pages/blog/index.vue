@@ -34,7 +34,6 @@
                 </el-container>
             </el-container>
             <div class="line"></div>
-
         </el-col>
     </el-row>
 </template>
