@@ -164,9 +164,9 @@
         },
         methods: {
             deleteTag(tag) {
-                var index = this.tags.indexOf(tag);
-                this.tags.splice(index, 1);
-                this.tagIds.splice(index, 1);
+                let index = this.params.tags.indexOf(tag);
+                this.params.tags.splice(index, 1);
+                this.params.tagIds.splice(index, 1);
             },
 
             handleInputConfirm() {
@@ -180,7 +180,7 @@
                 this.inputValue = '';
             },
             async imgAdd(pos, $file){
-                var formdata = new FormData();
+                let formdata = new FormData();
                 formdata.append('file', $file);
                 console.log($file);
                 console.log(formdata);
