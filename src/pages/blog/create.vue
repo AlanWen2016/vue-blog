@@ -48,17 +48,17 @@
                     <el-card class="box-card" style="height: 100%;width: 100%">
                         <el-input
                                 placeholder="请输入标题"
-                                v-model="title"
+                                v-model="params.title"
                                 clearable>
                         </el-input>
                         <mavon-editor style="height: 460px;margin-top: 1em"
-                           v-model="textValue"
+                           v-model="params.textValue"
                            @imgAdd="imgAdd" @imgDel="imgDel"/>
                         <div style="margin-top: 2em">
                             <h1><b><i>添加标签</i></b></h1>
                             <el-tag
                                     :key="tag.id"
-                                    v-for="tag in dynamicTags"
+                                    v-for="tag in params.tags"
                                     closable
                                     :type="tag.type"
                                     :disable-transitions="false"
@@ -72,7 +72,7 @@
                                        size="small"
                                        @change="handleInputConfirm">
                                 <el-option
-                                        v-for="item in tages"
+                                        v-for="item in tagList"
                                         :key="item.id"
                                         :label="item.value"
                                         :value="item">
@@ -81,8 +81,8 @@
                         </div>
                         <div style="margin-top: 3em;width: 100%;text-align: center">
                             <el-row>
-                                <el-button type="danger" @click="commit">发布博客</el-button>
-                                <el-button type="danger" @click="saveAsDraft">保存为草稿</el-button>
+                                <el-button type="danger" @click="saveBlog">发布博客</el-button>
+                                <el-button type="danger" @click="saveDraft">保存为草稿</el-button>
                                 <router-link to='/'>
                                     <el-button>返回</el-button>
                                 </router-link>
@@ -118,17 +118,19 @@
     import 'mavon-editor/dist/css/index.css'
     import axios from 'axios'
     import qs from 'qs';
-    import {SaveBlog,SaveAsDraft,ImgAdd} from 'Services/getData.js'
+    import {SaveBlog,saveDraft,ImgAdd} from 'Services/getData.js'
 
     export default {
         data() {
             return {
-                title:"",
-                dynamicTags: [],
-                dynamicTagIds:[],
-                inputVisible: true,
-                inputValue: "",
-                tages:[
+                params: {
+                    title:"",
+                    tags: [],
+                    tagIds:[],
+                    textValue: ''
+                },
+                inputValue:'',
+                tagList:[
                     {
                         id:1,
                         value:"javasrcipt",
@@ -153,10 +155,8 @@
                         id:5,
                         value:"python",
                         type:"danger"
-                    }
-
+                    },
                 ],
-                textValue:""
             };
         },
         components: {
@@ -164,21 +164,17 @@
         },
         methods: {
             deleteTag(tag) {
-                var index = this.dynamicTags.indexOf(tag);
-                this.dynamicTags.splice(index, 1);
-                this.dynamicTagIds.splice(index, 1);
-            },
-
-            showInput() {
-                this.inputVisible = true;
+                var index = this.tags.indexOf(tag);
+                this.tags.splice(index, 1);
+                this.tagIds.splice(index, 1);
             },
 
             handleInputConfirm() {
                 let inputValue = this.inputValue;
                 if (inputValue) {
-                    if(this.dynamicTags.indexOf(inputValue) == -1){
-                        this.dynamicTags.push(inputValue);
-                        this.dynamicTagIds.push(inputValue.id);
+                    if(this.params.tags.indexOf(inputValue) == -1){
+                        this.params.tags.push(inputValue);
+                        this.params.tagIds.push(inputValue.id);
                     }
                 }
                 this.inputValue = '';
@@ -194,36 +190,41 @@
             imgDel(pos, $file){
                 alert(2);
             },
-            async commit(){
-                if(!this.$store.state.status.login){
-                    this.$router.push('/');
-                    return;
+            saveBlog(){
+                let {tags, title, textValue} = this.params;
+                if(!title || !textValue){
+                    this.$message({
+                        message: '请填写完整~',
+                        type: 'warning',
+                    });
+                    return false;
                 }
-                if(this.dynamicTags.length == 0){
+                if(tags.length == 0){
                     this.$message({
                         message: '请选择标签',
                         type: 'warning',
                     });
                     return;
                 }
-                let params = qs.stringify({title:this.title,textValue:this.textValue,dynamicTagIds:this.dynamicTagIds}, { indices: false });
+                this.doSaveBlog();
+            },
+            async doSaveBlog(){
+                let {title, textValue, tagIds} = this.params;
+                let params = qs.stringify({title,textValue,tagIds}, { indices: false });
                 let res = await SaveBlog(params);
                 console.log(res.data);
             },
-            async saveAsDraft(){
-                if(!this.$store.state.status.login){
-                    this.$router.push('/');
-                    return;
-                }
-                if(this.dynamicTags.length == 0){
+            async saveDraft(){
+                if(this.tags.length == 0){
                     this.$message({
                         message: '请选择标签',
                         type: 'warning',
                     });
                     return;
                 }
-                let params = qs.stringify({title:this.title,textValue:this.textValue,dynamicTagIds:this.dynamicTagIds}, { indices: false });
-                let res = await SaveAsDraft(params);
+                let {title, textValue, tagIds} = this.params;
+                let params = qs.stringify({title,textValue,tagIds}, { indices: false });
+                let res = await saveDraft(params);
                 console.log(res);
             }
         }

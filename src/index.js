@@ -67,7 +67,7 @@ router.beforeEach(async (to, from, next) => {
         return;
     }
     // 登陆判断, 写入需要登陆
-    if (!store.state.status.login && to.name == 'create') {
+    if (!store.state.status.login) {
         await store.dispatch({type: 'getUserInfo'});
     }
     next();

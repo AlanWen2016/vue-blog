@@ -4,7 +4,7 @@
             <header-bar></header-bar>
         </el-header>
 
-        <el-main style="margin: 1em">
+        <el-main style="margin: 0em 1em">
             <router-view></router-view>
         </el-main>
 

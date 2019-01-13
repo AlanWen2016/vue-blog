@@ -4,11 +4,11 @@
         <el-col :span="4" :offset="4" style="height: 60px;font-size:24px;font-weight: bold; color: #e6a23c">
             <div style="width:250px;height:60px">
                 <router-link to="/">
-                    <img class="img-logo" src="~Assets/img/logo/logo_v2_1.png">
+                  <img class="img-logo" src="~Assets/img/logo/logo_v2_1.png">
                 </router-link>
             </div>
         </el-col>
-        <el-col :span="12" :offset="0">
+        <el-col :span="10" :offset="0">
             <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                 <el-submenu index="1">
                     <template slot="title">博客</template>
@@ -26,71 +26,58 @@
                     <el-menu-item index="2-2">选项2</el-menu-item>
                     <el-menu-item index="2-3">选项3</el-menu-item>
                 </el-submenu>
-
-
                 <!--<div style="display: inline-block;line-height: 60px;margin-left: 4em;">-->
                     <!--<el-input placeholder="请输入内容" v-model="searchVal" class="input-with-select">-->
                         <!--<el-button slot="append" icon="el-icon-search"></el-button>-->
                     <!--</el-input>-->
                 <!--</div>-->
-                <div style="display: inline-block; line-height: 60px;float: right">
-                    <el-button @click="showLoginDialog">登录</el-button>
-                </div>
             </el-menu>
-
+        </el-col>
+        <el-col :span="4" style="height: 60px;line-height: 70px"  v-if="!$store.state.status.login">
+                <img src="~Assets/img/qq/qq_bt_white.png" alt="" @click="showLoginDialog" style="vertical-align: center">
+        </el-col>
+        <el-col :span="4" style="height: 60px;line-height: 70px" v-else>
+            <el-dropdown>
+                 <span class="el-dropdown-link">
+                     <a href="javascript:;">
+                         <img class="user-head" :src="avatar"><span class="user-name">{{ nickName }}</span>
+                     </a>
+                     <i class="el-icon-arrow-down el-icon--right"></i>
+                 </span>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item> <router-link to='/create'>写博客</router-link></el-dropdown-item>
+                    <el-dropdown-item><span @click="logout">退出登录</span></el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
         </el-col>
     </el-row>
-    <el-dialog  :visible.sync="loginDialogVisible" center width="50%" class="login-dialog">
-        <el-tabs type="border-card" v-model="activeLoginTab">
-            <el-tab-pane label="第三方登录" name="qq">
-                <iframe :src="qqLoginSrc" frameborder="0"  id="tgl-login__pop" width="640" height="580"  scrolling="no"></iframe>
-            </el-tab-pane>
-            <el-tab-pane label="账号登录" name="login">
-                <el-form :model="form">
-                    <el-form-item label="账户：" :label-width="formLabelWidth">
-                        <el-input v-model="form.name" autocomplete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item label="密码：" :label-width="formLabelWidth">
-                        <el-input v-model="form.password" autocomplete="off" type="password"></el-input>
-                    </el-form-item>
-                    <el-form-item style="text-align:center">
-                        <el-button type="primary" @click="accountLogin">登录</el-button>
-                    </el-form-item>
-                </el-form>
-            </el-tab-pane>
-            <el-tab-pane label="账号注册" name="register">
-                <el-form :model="form">
-                    <el-form-item label="账户：" :label-width="formLabelWidth">
-                        <el-input v-model="form.name" autocomplete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item label="邮箱：" :label-width="formLabelWidth">
-                        <el-input v-model="form.email" autocomplete="off"></el-input>
-                    </el-form-item>
-                    <el-form-item label="密码：" :label-width="formLabelWidth">
-                        <el-input v-model="form.password" autocomplete="off" type="password"></el-input>
-                    </el-form-item>
-                    <el-form-item label="确认密码：" :label-width="formLabelWidth">
-                        <el-input v-model="form.password_confirmation" autocomplete="off" type="password"></el-input>
-                    </el-form-item>
-                    <el-form-item style="text-align:center">
-                        <el-button @click="accountRegister">注册</el-button>
-                    </el-form-item>
-                </el-form>
-            </el-tab-pane>
-        </el-tabs>
-        <div slot="footer" class="dialog-footer"></div>
+    <el-dialog  :visible.sync="loginDialogVisible" center  width="40%" class="login-dialog">
+        <div style="width: 100%;height: 100%;text-align: center">
+            <iframe :src="qqLoginSrc" frameborder="0"  id="tgl-login__pop" width="640" height="580"  scrolling="no"></iframe>
+        </div>
     </el-dialog>
     </div>
 </template>
 
 <style scoped>
-    .login-dialog .el-form-item{
-        margin-right: 2em
+    .user-head {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        box-shadow: 0 4px 7px 0 rgba(194,194,194,0.50);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto 0;
+        right: 80px;
     }
+
+
 </style>
 
 <script>
-    import {AccountLogin,AccountRegister, QQLoginUrl} from 'Services/getData.js';
+    import {AccountLogin,AccountRegister, QQLoginUrl, LoginOut} from 'Services/getData.js';
+    import { mapGetters } from 'vuex';
     export default {
         name: "header-bar",
         data() {
@@ -106,47 +93,44 @@
                     password_confirmation:''
                 },
                 formLabelWidth: '120px',
-                activeLoginTab: 'qq', // 登录弹窗active Tab
-                qqLoginSrc: ''
+                qqLoginSrc: '',
             }
         },
+        computed: {
+            ...mapGetters([
+                'avatar','nickName'
+            ]),
+        },
         mounted() {
-            this.form.name = 'Git';
-            this.form.password = '123456';
-            // this.accountLogin();
+            window.loginSuccess = () =>{
+                this.loginDialogVisible = false;
+                this.$store.dispatch({ type : 'getUserInfo'});
+                // location.reload();
+            },
+            window.loginFailure = (message)=>{
+                alert(message);
+            }
         },
         methods: {
             showLoginDialog() {
                 this.loginDialogVisible = true;
                 this.getQQLoginUrl();
-
+            },
+            async logout() {
+                alert();
+                let res = await LoginOut();
+                if(res.data.code == 0){
+                    location.href=`${document.location.protocol}//${document.location.hostname}`;
+                }
             },
             async getQQLoginUrl(){
                 this.qqLoginSrc = '';
                 let res = await QQLoginUrl();
                 this.qqLoginSrc = res.data.url;
-                console.log(res)
-            },
-            async accountRegister(){
-                let {name, password, email} = this.form;
-                let res = await AccountRegister(this.form);
-                console.log(res);
-            },
-            async accountLogin() {
-                if(this.activeLoginTab == 'login'){
-                    let {name, password} = this.form;
-                    let res = await AccountLogin({name, password});
-                    console.log(res);
-                }
             },
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);
-            },
-            handleOpen() {
-            },
-            handleClose() {
-            },
-
+            }
 
         },
     }
