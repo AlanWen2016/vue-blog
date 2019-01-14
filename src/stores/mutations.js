@@ -4,6 +4,10 @@ export default {
     [SAVE_USER_INFO](state, userInfo) {
         state.userInfo = userInfo;
         // 保存在回话中，刷新初始化state时可用
-        state.status.login = true;
+        if(userInfo && userInfo.id){
+            state.status.login = true;
+        }else{
+            state.status.login = false;
+        }
     },
 }

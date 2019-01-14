@@ -3,7 +3,7 @@ import {SAVE_USER_INFO} from "./mutation-types";
 export default {
     async getUserInfo ({commit, state}) {
         let res = await UserInfo();
-        if (res.status === 200 && res.data) {
+        if (res.status === 200) {
             commit('SAVE_USER_INFO', res.data);
         }
         return res;
