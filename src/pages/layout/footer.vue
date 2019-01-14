@@ -5,7 +5,8 @@
             <span style="font-size:0.9em;margin-left: 1em">
                             Designed by
                             <span style="color: #e27575;font-size: 14px;">❤</span>
-                            <a href="https://github.com/AlanWen2016" target="_blank" style="color:inherit">AlanWen</a>
+                            <a href="https://github.com/AlanWen2016" target="_blank" style="color:inherit">Alan-Wen,</a>
+                            <a href="https://github.com/Andew-gu" target="_blank" style="color:inherit">Andew-Gu</a>
                             </span>
             <a href="https://github.com/AlanWen2016/vue-blog" target="_blank">
                 <img class="github" src="~Assets/img/icon/GitHub-Mark-32px.png">
