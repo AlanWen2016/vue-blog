@@ -117,7 +117,6 @@
                 this.getQQLoginUrl();
             },
             async logout() {
-                alert();
                 let res = await LoginOut();
                 if(res.data.code == 0){
                     location.href=`${document.location.protocol}//${document.location.hostname}`;
