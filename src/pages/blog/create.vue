@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col :span="16" :offset="4">
-            <el-container style="height: 52em">
+            <el-container style="height: auto">
                 <el-aside width="200px" style="overflow: hidden">
                     <el-card class="box-card" style="width: 200px;height: 100%;padding: 0;margin: 0">
                         <el-menu style="border: 0">
@@ -52,23 +52,13 @@
                                 clearable>
                         </el-input>
                         <mavon-editor style="height: 460px;margin-top: 1em"
-                           v-model="params.textValue"
+                           v-model="params.content"
                            @imgAdd="imgAdd" @imgDel="imgDel"/>
-                        <div style="margin-top: 2em">
-                            <h1><b><i>添加标签</i></b></h1>
-                            <el-tag
-                                    :key="tag.id"
-                                    v-for="tag in params.tags"
-                                    closable
-                                    :type="tag.type"
-                                    :disable-transitions="false"
-                                    @close="deleteTag(tag)">
-                                {{tag.value}}
-                            </el-tag>
+                        <div style="margin-top: 2em;height: 5em">
                             <el-select
-                                       style="float: right;width: 100px"
+                                       style="width: 120px;display: block;height: 3em"
                                        v-model="inputValue"
-                                       placeholder="+ 新标签"
+                                       placeholder="+ 添加标签"
                                        size="small"
                                        @change="handleInputConfirm">
                                 <el-option
@@ -78,14 +68,21 @@
                                         :value="item">
                                 </el-option>
                             </el-select>
+                            <el-tag
+                                    :key="tag.id"
+                                    v-for="tag in params.tags"
+                                    closable
+                                    :type="tag.type"
+                                    :disable-transitions="false"
+                                    @close="deleteTag(tag)">
+                                {{tag.value}}
+                            </el-tag>
                         </div>
-                        <div style="margin-top: 3em;width: 100%;text-align: center">
+                        <div style="margin: 5em 0;width: 100%;text-align: center">
                             <el-row>
-                                <el-button type="danger" @click="saveBlog">发布博客</el-button>
-                                <el-button type="danger" @click="saveDraft">保存为草稿</el-button>
-                                <router-link to='/'>
-                                    <el-button>返回</el-button>
-                                </router-link>
+                                <el-button type="primary" @click="saveBlog">发布博客</el-button>
+                                <el-button type="primary" @click="saveDraft">保存为草稿</el-button>
+                                <el-button @click="$router.push({path: '/'})">返回</el-button>
                             </el-row>
                         </div>
                     </el-card>
@@ -127,7 +124,7 @@
                     title:"",
                     tags: [],
                     tagIds:[],
-                    textValue: ''
+                    content: ''
                 },
                 inputValue:'',
                 tagList:[
@@ -191,8 +188,8 @@
                 alert(2);
             },
             saveBlog(){
-                let {tags, title, textValue} = this.params;
-                if(!title || !textValue){
+                let {tags, title, content} = this.params;
+                if(!title || !content){
                     this.$message({
                         message: '请填写完整~',
                         type: 'warning',
@@ -209,8 +206,8 @@
                 this.doSaveBlog();
             },
             async doSaveBlog(){
-                let {title, textValue, tagIds} = this.params;
-                let params = qs.stringify({title,textValue,tagIds}, { indices: false });
+                let {title, content, tagIds} = this.params;
+                let params = qs.stringify({title,content,tagIds}, { indices: false });
                 let res = await SaveBlog(params);
                 console.log(res.data);
             },
@@ -222,8 +219,8 @@
                     });
                     return;
                 }
-                let {title, textValue, tagIds} = this.params;
-                let params = qs.stringify({title,textValue,tagIds}, { indices: false });
+                let {title, content, tagIds} = this.params;
+                let params = qs.stringify({title,content,tagIds}, { indices: false });
                 let res = await saveDraft(params);
                 console.log(res);
             }
