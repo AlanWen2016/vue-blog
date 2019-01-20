@@ -118,6 +118,7 @@
     import {SaveBlog,saveDraft,ImgAdd} from 'Services/getData.js'
 
     export default {
+        name: 'blog-create',
         data() {
             return {
                 params: {

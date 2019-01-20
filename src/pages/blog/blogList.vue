@@ -1,6 +1,6 @@
 <template>
     <div class="main-content">
-        <div style="display: inline-block;line-height: 60px;">
+        <div style="display: inline-block;line-height: 60px;width: 50%">
             <el-input placeholder="请输入内容" v-model="params.title" class="input-with-select search-input">
                 <el-button slot="append" icon="el-icon-search" @click="getBlogList"></el-button>
             </el-input>
@@ -19,7 +19,7 @@
                             <div>
                                 <i class="el-icon-time"></i><span>{{ blog.updated_at }}</span>
                                 <i class="el-icon-edit-outline"></i><span>{{ blog.creator }}</span>
-                                <i class="el-icon-view"></i><span>阅读（154）</span>
+                                <i class="el-icon-view"></i><span>阅读（999）</span>
                             </div>
                         </el-col>
                     </el-row>
@@ -50,6 +50,7 @@
 <style lang="scss" scoped>
     .main-content{
         padding: 1em;
+        text-align: left;
     }
     .img-content{width: 180px; height: 180px;float: left;margin-bottom: 20px}
     .blog-title{height: 3em;padding-left: 1em}
@@ -84,7 +85,7 @@
         border-bottom: 4px solid transparent;
     }
     .el-pagination{margin-top: 2em}
-    .search-input{width: 600px}
+    .search-input{width: 100%}
 </style>
 
 

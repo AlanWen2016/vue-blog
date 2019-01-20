@@ -31,6 +31,7 @@
     }
     .el-main-right{
         background-color: white;
+        width: 100%;
     }
     .el-aside {
         background-color: #eee;
@@ -89,8 +90,6 @@ export default {
     methods: {
         handleSelect(key, keyPath) {
             console.log(key, keyPath);
-        },
-        handleOpen() {
         },
         handleClose() {
         },

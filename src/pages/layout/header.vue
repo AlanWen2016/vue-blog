@@ -10,27 +10,16 @@
         </el-col>
         <el-col :span="10" :offset="0">
             <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-                <el-submenu index="1">
-                    <template slot="title">博客</template>
-                    <router-link to='/create'>
-                        <el-menu-item index="2-1"><i class="el-icon-edit">写博客</i></el-menu-item>
-                    </router-link>
-                    <el-menu-item index="2-2">选项2</el-menu-item>
-                    <el-menu-item index="2-3">选项3</el-menu-item>
-                </el-submenu>
+                <!--<el-submenu index="1">-->
+                    <!--<template slot="title">博客</template>-->
+                    <!--<router-link to='/create'>-->
+                        <!--<el-menu-item index="2-1"><i class="el-icon-edit">写博客</i></el-menu-item>-->
+                    <!--</router-link>-->
+                    <!--<el-menu-item index="2-2">选项2</el-menu-item>-->
+                    <!--<el-menu-item index="2-3">选项3</el-menu-item>-->
+                <!--</el-submenu>-->
                 <el-menu-item index="2">项目</el-menu-item>
                 <el-menu-item index="3"><a href="javascript:;" target="_blank">关于</a></el-menu-item>
-                <el-submenu index="4">
-                    <template slot="title">更多</template>
-                    <el-menu-item index="2-1">选项1</el-menu-item>
-                    <el-menu-item index="2-2">选项2</el-menu-item>
-                    <el-menu-item index="2-3">选项3</el-menu-item>
-                </el-submenu>
-                <!--<div style="display: inline-block;line-height: 60px;margin-left: 4em;">-->
-                    <!--<el-input placeholder="请输入内容" v-model="searchVal" class="input-with-select">-->
-                        <!--<el-button slot="append" icon="el-icon-search"></el-button>-->
-                    <!--</el-input>-->
-                <!--</div>-->
             </el-menu>
         </el-col>
         <el-col :span="4" style="height: 60px;line-height: 70px"  v-if="!$store.state.status.login">
@@ -45,14 +34,14 @@
                      <i class="el-icon-arrow-down el-icon--right"></i>
                  </span>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item> <router-link to='/create'>写博客</router-link></el-dropdown-item>
-                    <el-dropdown-item><span @click="logout">退出登录</span></el-dropdown-item>
+                    <el-dropdown-item @click.native="goCreateBlog">写博客</el-dropdown-item>
+                    <el-dropdown-item  @click.native="logout">退出登录</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </el-col>
     </el-row>
-    <el-dialog  :visible.sync="loginDialogVisible" center  width="40%" class="login-dialog">
-        <div style="width: 100%;height: 100%;text-align: center">
+    <el-dialog  :visible.sync="loginDialogVisible" center  width="700" height="100%" class="login-dialog" style="overflow: hidden;">
+        <div style="overflow: hidden;text-align: center">
             <iframe :src="qqLoginSrc" frameborder="0"  id="tgl-login__pop" width="640" height="580"  scrolling="no"></iframe>
         </div>
     </el-dialog>
@@ -115,6 +104,9 @@
             showLoginDialog() {
                 this.loginDialogVisible = true;
                 this.getQQLoginUrl();
+            },
+            goCreateBlog() {
+                this.$router.push({path: '/create'});
             },
             async logout() {
                 let res = await LoginOut();

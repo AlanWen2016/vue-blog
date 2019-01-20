@@ -11,7 +11,7 @@
             <el-col :span="24"  class="blog-info">
                 <div>
                     <i class="el-icon-time"></i><span>{{ blogInfo.updated_at ? blogInfo.updated_at.substr(0,10) : '' }}</span>
-                    <i class="el-icon-edit-outline"></i><span>{{ blogInfo.creator }}</span>
+                    <i class="el-icon-edit-outline"></i><span>焦糖瓜子</span>
                     <i class="el-icon-view"></i><span>阅读（154）</span>
                 </div>
             </el-col>
@@ -29,6 +29,7 @@
 <style lang="scss" scoped>
     .main-content{
         padding: 1em;
+        width: 98%;
     }
     .img-content{width: 180px; height: 180px;float: left;margin-bottom: 20px}
     .blog-title{height:4em;text-align: center;line-height: 4em}
