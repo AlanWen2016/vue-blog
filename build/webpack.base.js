@@ -3,14 +3,17 @@
 const webpack = require('webpack');
 const path = require('path');
 const srcPath = path.join(__dirname, '../src');
-
+const rootPath = path.join(__dirname, '../');
 // vue-loader 插件
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 // html插件
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js', //入口
+  entry:{
+      vendor : ['vue', 'vue-router'],
+      main : path.join(srcPath, 'index.js')
+  },
   module: {
     rules: [
         {
@@ -82,17 +85,19 @@ module.exports = {
         template: path.resolve(__dirname, '../index.html'),
       }),
   ],// 插件
-  resolve: {
-    extensions : ['.js', '.jsx', '.vue', 'vue'],
-    alias: {
-      'vue': 'vue/dist/vue.js',
-      'Pages' : path.resolve(srcPath, 'pages/'),
-      'Services' : path.resolve(srcPath, 'services/'),
-      'Filters' : path.resolve(srcPath, 'filters/'),
-      'Stores' : path.resolve(srcPath, 'stores/'),
-      'Libs' : path.resolve(srcPath, 'libs/'),
-      'Assets' : path.resolve(srcPath, 'assets/'),
-      'Mock' : path.resolve(srcPath, 'mock/'),
-   }
-  }
+    resolve: {
+        extensions : ['.js', '.jsx', '.vue', 'vue'],
+        alias: {
+            'vue' : path.resolve(rootPath, 'node_modules/vue/dist/vue.min.js'),
+            'vue-router' : path.resolve(rootPath, 'node_modules/vue-router/dist/vue-router.min.js'),
+            'element-ui' : path.resolve(rootPath, 'node_modules/element-ui/'),
+            'Pages' : path.resolve(srcPath, 'pages/'),
+            'Services' : path.resolve(srcPath, 'services/'),
+            'Filters' : path.resolve(srcPath, 'filters/'),
+            'Stores' : path.resolve(srcPath, 'stores/'),
+            'Libs' : path.resolve(srcPath, 'libs/'),
+            'Assets' : path.resolve(srcPath, 'assets/'),
+            'Mock' : path.resolve(srcPath, 'mock/'),
+        }
+    }
 };

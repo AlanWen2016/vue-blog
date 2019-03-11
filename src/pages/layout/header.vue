@@ -1,14 +1,14 @@
 <template>
 <div>
     <el-row :gutter="20">
-        <el-col :span="4" :offset="4" style="height: 60px;font-size:24px;font-weight: bold; color: #e6a23c">
-            <div style="width:250px;height:60px">
+        <el-col :span="6" :offset="4" style="height: 60px;font-size:24px;font-weight: bold; color: #e6a23c">
+            <div style="height:60px;width: 100%">
                 <router-link to="/">
                   <img class="img-logo" src="~Assets/img/logo/logo_v2_1.png">
                 </router-link>
             </div>
         </el-col>
-        <el-col :span="10" :offset="0">
+        <el-col :span="8" :offset="0">
             <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                 <!--<el-submenu index="1">-->
                     <!--<template slot="title">博客</template>-->
@@ -60,8 +60,6 @@
         margin: auto 0;
         right: 80px;
     }
-
-
 </style>
 
 <script>
